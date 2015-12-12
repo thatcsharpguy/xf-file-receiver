@@ -50,46 +50,44 @@
 	<string>LaunchScreen</string>
 	<!-- Document declaration: -->
 	<key>CFBundleDocumentTypes</key>
-<array>
-    <dict>
-        <key>CFBundleTypeName</key>
-        <!-- The name of this file type. -->
-        <string>Markdown Configuration</string>
-        <key>CFBundleTypeIconFiles</key>
-        <!-- The name of this file type. -->
-        <array/>
-        <key>LSItemContentTypes</key>
-        <!-- The different type identifiers that are handled 
-             as this type of file. -->
-        <array>
-            <!-- This is a custom type I declare below -->
-            <string>net.daringfireball.markdown</string>
-        </array>
-    </dict>
-</array>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<!-- The name of this file type: -->
+			<string>Markdown document</string>
+			<key>CFBundleTypeIconFiles</key>
+			<!-- Custom icons: -->
+			<array/>
+			<key>LSItemContentTypes</key>
+			<!-- Identifiers: -->
+			<array>
+				<!-- This is a custom type I declare below -->
+				<string>net.daringfireball.markdown</string>
+			</array>
+		</dict>
+	</array>
 
-<key>UTExportedTypeDeclarations</key>
-<array>
-    <dict>
-        <key>UTTypeConformsTo</key>
-        <!-- How these files are structured -->
-        <array>
-            <string>public.plain-text</string>
-        </array>
-        <key>UTTypeIdentifier</key>
-        <!-- This is the identifier for the custom type -->
-        <string>net.daringfireball.markdown</string> 
-        <key>UTTypeDescription</key>
-        <!-- How your app calls these files. -->
-        <string>Markdown Configuration File</string>
-        <key>UTTypeTagSpecification</key>
-        <dict>
-            <key>public.filename-extension</key>
-             <!-- The extension of the files of this type -->
-            <string>md</string>
-        </dict>
-    </dict>
-</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.plain-text</string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<!-- Custom identifier -->
+			<string>net.daringfireball.markdown</string> 
+			<key>UTTypeDescription</key>
+			<!-- Name of the file type in your app -->
+			<string>Markdown document</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<!-- The extension of the files of this type -->
+				<string>md</string>
+			</dict>
+		</dict>
+	</array>
 
 </dict>
 </plist>
