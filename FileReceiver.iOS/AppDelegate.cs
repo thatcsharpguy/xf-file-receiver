@@ -13,6 +13,8 @@ namespace FileReceiver.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
+		App _app;
+
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
         // method you should instantiate the window, load the UI into it and then make the window
@@ -23,9 +25,25 @@ namespace FileReceiver.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+			_app = new App ();
+			LoadApplication(_app);
 
             return base.FinishedLaunching(app, options);
         }
+
+		// In your AppDelegate class:
+		public override bool OpenUrl (UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
+		{
+			//Console.WriteLine ("Invoked with OpenUrl: {0}", url.AbsoluteString);
+			var name = url.PathComponents [url.PathComponents.Count() - 1];
+			var text = "*" + name + "*"; //System.IO.File.ReadAllText(url.AbsoluteString);
+			_app.IncomingFile = new IncomingFile 
+			{
+				Name =  name,
+				Content = text
+			};
+			NSNotificationCenter.DefaultCenter.PostNotificationName ("OpenUrl", url);
+			return true;
+		}
     }
 }
