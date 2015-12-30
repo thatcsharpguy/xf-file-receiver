@@ -36,7 +36,12 @@ namespace FileReceiver.iOS
 		{
 			//Console.WriteLine ("Invoked with OpenUrl: {0}", url.AbsoluteString);
 			var name = url.PathComponents [url.PathComponents.Count() - 1];
-			var text = "*" + name + "*"; //System.IO.File.ReadAllText(url.AbsoluteString);
+		    var text =
+		        "# Routes  \r\n\r\n" +
+		        " - " + url.AbsoluteString + "  \r\n\r\n" +
+		        " - " + url.AbsoluteUrl.AbsoluteString + "  \r\n\r\n" +
+		        " - " + url.BaseUrl + "  \r\n\r\n";
+                // System.IO.File.ReadAllText(url.AbsoluteUrl.);
 			_app.IncomingFile = new IncomingFile 
 			{
 				Name =  name,
