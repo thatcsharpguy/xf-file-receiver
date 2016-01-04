@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // La plantilla Aplicación vacía está documentada en http://go.microsoft.com/fwlink/?LinkId=234227
@@ -34,6 +25,33 @@ namespace FileReceiver.Windows8
             this.Suspending += OnSuspending;
         }
 
+        protected override void OnFileActivated(FileActivatedEventArgs e)
+        {
+            base.OnFileActivated(e);
+            StorageFile file = null;
+            if (e.Files.Count == 1)
+            {
+                file = e.Files[0] as StorageFile;
+            }
+
+
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null)
+            {
+                rootFrame = new Frame();
+                rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
+                rootFrame.NavigationFailed += OnNavigationFailed;
+
+                Xamarin.Forms.Forms.Init(e); // <- DON'T FORGET TO INITIALIZE FORMS
+
+                Window.Current.Content = rootFrame;
+            }
+
+            // Pass the recently opened file ----vvvv
+            rootFrame.Navigate(typeof(MainPage), file);
+            Window.Current.Activate();
+        }
+
         /// <summary>
         /// Se invoca cuando la aplicación la inicia normalmente el usuario final.  Se usarán otros puntos
         /// se usará por ejemplo cuando la aplicación se inicie para abrir un archivo específico.
@@ -42,12 +60,6 @@ namespace FileReceiver.Windows8
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                this.DebugSettings.EnableFrameRateCounter = true;
-            }
-#endif
 
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -61,6 +73,9 @@ namespace FileReceiver.Windows8
                 rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
+
+
+                Xamarin.Forms.Forms.Init(e); // <- DON'T FORGET TO INITIALIZE FORMS
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

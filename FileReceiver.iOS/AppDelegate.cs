@@ -37,10 +37,6 @@ namespace FileReceiver.iOS
 		// 
 		public override bool OpenUrl (UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
 		{
-			//Console.WriteLine ("Invoked with OpenUrl: {0}", url.AbsoluteString);
-			var name = url.AbsoluteString;
-			//var text = "*" + name + "*"; //System.IO.File.ReadAllText(url.AbsoluteString);
-			//var text = System.IO.File.ReadAllText(url.AbsoluteString);
 
 			string path = "";
 			for (int i = 0; i < url.PathComponents.Length - 1; i++) {
@@ -79,7 +75,6 @@ namespace FileReceiver.iOS
 			else{
 				Console.WriteLine ("\t No existe");
 			}
-
 			return true;
 		}
     }
