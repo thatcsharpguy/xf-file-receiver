@@ -39,41 +39,24 @@ namespace FileReceiver.iOS
 		{
 
 			string path = "";
-			for (int i = 0; i < url.PathComponents.Length - 1; i++) {
+			for (int i = 0; i < url.PathComponents.Length; i++) {
 				path = System.IO.Path.Combine (path, url.PathComponents [i]);
-				var file = System.IO.Directory.Exists (path);
-				//Console.WriteLine ("Revisando " + path);
-				if (file) {
-					Console.WriteLine ("\t Existe");
-				}
-				else{
-					Console.WriteLine ("\t No existe");
-				}
 			}
 
 			var fileName = url.PathComponents [url.PathComponents.Length - 1];
-			path = System.IO.Path.Combine (path, fileName);
 
-			//Console.WriteLine ("Revisando " + path);
-
-			Console.WriteLine (path);
-			Console.WriteLine (url.AbsoluteUrl);
-			Console.WriteLine (url.AbsoluteString);
-			Console.WriteLine (url.FilePathUrl)
 			var fileExists = System.IO.File.Exists (path);
 			if(fileExists) {
-				Console.WriteLine ("\t Existe");
-				var textFile = System.IO.File.ReadAllText (path);
+				var fileContent = System.IO.File.ReadAllText (path);
 
 				_app.IncomingFile = new IncomingFile 
 				{
-					Name =  name,
-					Content = textFile
+					Name =  fileName,
+					Content = fileContent
 				};
 				
 			}
 			else{
-				Console.WriteLine ("\t No existe");
 			}
 			return true;
 		}
