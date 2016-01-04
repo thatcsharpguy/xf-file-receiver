@@ -21,11 +21,9 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>6.0</string>
+	<string>9.0</string>
 	<key>CFBundleDisplayName</key>
 	<string>FileReceiver</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.FileReceiver</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
@@ -48,25 +46,19 @@
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<!-- Document declaration: -->
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeName</key>
-			<!-- The name of this file type: -->
 			<string>Markdown document</string>
 			<key>CFBundleTypeIconFiles</key>
-			<!-- Custom icons: -->
 			<array/>
 			<key>LSItemContentTypes</key>
-			<!-- Identifiers: -->
 			<array>
-				<!-- This is a custom type I declare below -->
 				<string>net.daringfireball.markdown</string>
 			</array>
 		</dict>
 	</array>
-
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -75,19 +67,17 @@
 				<string>public.plain-text</string>
 			</array>
 			<key>UTTypeIdentifier</key>
-			<!-- Custom identifier -->
-			<string>net.daringfireball.markdown</string> 
+			<string>net.daringfireball.markdown</string>
 			<key>UTTypeDescription</key>
-			<!-- Name of the file type in your app -->
 			<string>Markdown document</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
-				<!-- The extension of the files of this type -->
 				<string>md</string>
 			</dict>
 		</dict>
 	</array>
-
+	<key>CFBundleIdentifier</key>
+	<string>com.thatcsharpguy.filereceiver</string>
 </dict>
 </plist>

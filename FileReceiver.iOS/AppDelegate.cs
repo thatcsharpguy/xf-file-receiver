@@ -13,7 +13,7 @@ namespace FileReceiver.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
-		App _app;
+		FileReceiver.App _app;
 
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
@@ -24,25 +24,62 @@ namespace FileReceiver.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+			Console.WriteLine ("Finished launchong");
             global::Xamarin.Forms.Forms.Init();
 			_app = new App ();
 			LoadApplication(_app);
 
             return base.FinishedLaunching(app, options);
+
         }
 
-		// In your AppDelegate class:
+
+		// 
 		public override bool OpenUrl (UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
 		{
 			//Console.WriteLine ("Invoked with OpenUrl: {0}", url.AbsoluteString);
-			var name = url.PathComponents [url.PathComponents.Count() - 1];
-			var text = "*" + name + "*"; //System.IO.File.ReadAllText(url.AbsoluteString);
-			_app.IncomingFile = new IncomingFile 
-			{
-				Name =  name,
-				Content = text
-			};
-			NSNotificationCenter.DefaultCenter.PostNotificationName ("OpenUrl", url);
+			var name = url.AbsoluteString;
+			//var text = "*" + name + "*"; //System.IO.File.ReadAllText(url.AbsoluteString);
+			//var text = System.IO.File.ReadAllText(url.AbsoluteString);
+
+			string path = "";
+			for (int i = 0; i < url.PathComponents.Length - 1; i++) {
+				path = System.IO.Path.Combine (path, url.PathComponents [i]);
+				var file = System.IO.Directory.Exists (path);
+				//Console.WriteLine ("Revisando " + path);
+				if (file) {
+					Console.WriteLine ("\t Existe");
+				}
+				else{
+					Console.WriteLine ("\t No existe");
+				}
+			}
+
+			var fileName = url.PathComponents [url.PathComponents.Length - 1];
+			path = System.IO.Path.Combine (path, fileName);
+
+			//Console.WriteLine ("Revisando " + path);
+
+			Console.WriteLine (path);
+			Console.WriteLine (url.AbsoluteUrl);
+			Console.WriteLine (url.AbsoluteString);
+			Console.WriteLine (url.FilePathUrl)
+			var fileExists = System.IO.File.Exists (path);
+			if(fileExists) {
+				Console.WriteLine ("\t Existe");
+				var textFile = System.IO.File.ReadAllText (path);
+
+				_app.IncomingFile = new IncomingFile 
+				{
+					Name =  name,
+					Content = textFile
+				};
+				
+			}
+			else{
+				Console.WriteLine ("\t No existe");
+			}
+
 			return true;
 		}
     }
