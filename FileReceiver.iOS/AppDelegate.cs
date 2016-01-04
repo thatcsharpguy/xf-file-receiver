@@ -37,17 +37,13 @@ namespace FileReceiver.iOS
 		// 
 		public override bool OpenUrl (UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
 		{
-
-			string path = "";
-			for (int i = 0; i < url.PathComponents.Length; i++) {
-				path = System.IO.Path.Combine (path, url.PathComponents [i]);
-			}
-
+			// Remove "file://" at the beginning of the url:
+			string filePath = url.AbsoluteString.Substring(7);
 			var fileName = url.PathComponents [url.PathComponents.Length - 1];
 
-			var fileExists = System.IO.File.Exists (path);
+			var fileExists = System.IO.File.Exists (filePath);
 			if(fileExists) {
-				var fileContent = System.IO.File.ReadAllText (path);
+				var fileContent = System.IO.File.ReadAllText (filePath);
 
 				_app.IncomingFile = new IncomingFile 
 				{
